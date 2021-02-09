@@ -1,0 +1,222 @@
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  HStack,
+  Select,
+  Tabs,
+  TabList,
+  Tab,
+  chakra,
+  Text,
+  Tag,
+  Grid,
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import { BsGridFill } from "react-icons/bs";
+import { IoListOutline } from "react-icons/io5";
+import { searchTags } from "../mockDB/db";
+import ProductCard from "./ProductCard";
+import Badge from "@material-ui/core/Badge";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+
+// Give the components chakra props
+const GridIcon = chakra(BsGridFill);
+const ListIcon = chakra(IoListOutline);
+
+const Main = () => {
+  const { products, savedItemsCount } = useContext(GlobalContext);
+
+  return (
+    <Box
+      boxShadow="base"
+      mx={[0, 4]}
+      h="100%"
+      rounded="md"
+      border="1px solid"
+      borderColor="gray.200"
+      p={3}
+    >
+      <Flex align="flex-end" justify="space-between" flexWrap="wrap">
+        <HStack align="flex-end" mr={5} mb={5}>
+          <FormControl w="fit-content">
+            <FormLabel
+              textTransform="uppercase"
+              fontSize="x-small"
+              w="fit-content"
+            >
+              Sort by
+            </FormLabel>
+            <Select
+              // minW="fit-content"
+              // size="xs"
+              size={useBreakpointValue({
+                base: "xs",
+                smallTablet: "sm",
+                sm: "sm",
+              })}
+              rounded="base"
+              borderColor="gray.500"
+              cursor="pointer"
+            >
+              <option value="option1">Wellness</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </Select>
+          </FormControl>
+          <FormControl w="fit-content">
+            <Select
+              // minW="fit-content"
+              // size="xs"
+              size={useBreakpointValue({
+                base: "xs",
+                smallTablet: "sm",
+                sm: "sm",
+              })}
+              rounded="base"
+              borderColor="gray.400"
+              cursor="pointer"
+            >
+              <option value="option1">Free Shipping</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </Select>
+          </FormControl>
+          <FormControl w="fit-content">
+            <Select
+              // minW="fit-content"
+              // size="xs"
+              size={useBreakpointValue({
+                base: "xs",
+                smallTablet: "sm",
+                sm: "sm",
+              })}
+              rounded="base"
+              borderColor="gray.400"
+              cursor="pointer"
+            >
+              <option value="option1">Delivery options</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </Select>
+          </FormControl>
+        </HStack>
+        <Flex justify="space-between" align="center" flexWrap="wrap" w="100%">
+          <Tabs variant="unstyled" size="sm" mb={5}>
+            <TabList bg="appBlue.50" rounded="md">
+              <Tab
+                _selected={{
+                  border: "1px solid",
+                  borderColor: "gray.200",
+                  color: "appBlue.400",
+                  bg: "white",
+                  rounded: "base",
+                  boxShadow: "base",
+                }}
+                fontSize={["xs", "sm"]}
+              >
+                Show All
+              </Tab>
+              <Tab
+                _selected={{
+                  border: "1px solid",
+                  borderColor: "gray.200",
+                  color: "appBlue.400",
+                  bg: "white",
+                  rounded: "base",
+                  boxShadow: "base",
+                }}
+                fontSize={["xs", "sm"]}
+              >
+                <Badge badgeContent={savedItemsCount} color="secondary">
+                  Saved
+                </Badge>
+              </Tab>
+              <Tab
+                _selected={{
+                  border: "1px solid",
+                  borderColor: "gray.200",
+                  color: "appBlue.400",
+                  bg: "white",
+                  rounded: "base",
+                  boxShadow: "base",
+                }}
+                fontSize={["xs", "sm"]}
+              >
+                Buy now
+              </Tab>
+            </TabList>
+          </Tabs>
+          <Tabs
+            variant="unstyled"
+            size={useBreakpointValue({
+              base: "sm",
+              smallTablet: "md",
+              sm: "md",
+            })}
+            mb={5}
+          >
+            <TabList bg="appBlue.50" rounded="md">
+              <Tab
+                _selected={{
+                  color: "appBlue.400",
+                  bg: "white",
+                  rounded: "base",
+                  boxShadow: "base",
+                }}
+              >
+                <ListIcon />
+              </Tab>
+              <Tab
+                _selected={{
+                  color: "appBlue.400",
+                  bg: "white",
+                  rounded: "base",
+                  boxShadow: "base",
+                }}
+              >
+                <GridIcon />
+              </Tab>
+            </TabList>
+          </Tabs>
+        </Flex>
+      </Flex>
+      <HStack mb={5} spacing={2} flexWrap="wrap">
+        <Text fontWeight="bold" fontSize="sm" mr={3}>
+          Related
+        </Text>
+        {searchTags.map((tag, i) => (
+          <Tag key={i} size="sm" bg="blackAlpha.200" rounded="full" m={1}>
+            {tag}
+          </Tag>
+        ))}
+      </HStack>
+      <Grid
+        p={3}
+        templateColumns="repeat(auto-fit, minmax(240px, 1fr))"
+        gap={3}
+        placeItems="center"
+        placeContent="center"
+      >
+        {products!.map((product, i) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Grid>
+    </Box>
+  );
+};
+
+export default Main;
+
+declare global {
+  interface ObjectConstructor {
+    filter: (obj: any, predicate: any) => any;
+  }
+}
+// Custom function to filter objects
+Object.filter = (obj, predicate) =>
+  Object.keys(obj)
+    .filter(key => predicate(obj[key]))
+    .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {});

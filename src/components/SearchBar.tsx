@@ -13,6 +13,7 @@ type Props = {
   display: string[];
 };
 
+// Create new Form component and pass it chakra props
 const Form = chakra("form");
 
 const SearchBar = ({ display }: Props) => {
@@ -24,7 +25,6 @@ const SearchBar = ({ display }: Props) => {
     history.push(`/search/${value}`);
   };
   return (
-    <>
       <Form
         display={display}
         onSubmit={handleSubmit}
@@ -67,7 +67,6 @@ const SearchBar = ({ display }: Props) => {
           />
         </InputGroup>
       </Form>
-    </>
   );
 };
 

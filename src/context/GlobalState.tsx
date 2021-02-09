@@ -5,13 +5,13 @@ import { mockProducts } from "../mockDB/db";
 type ContextType = {
   products?: ProductType[];
   cartItemCount?: number;
+  totalPrice?: number;
+  savedItemsCount?: number;
   addToCart?: (product: ProductType) => void;
   deleteFromCart?: (id: number | string) => void;
   setQuantity?: (qty: string, id: number | string) => void;
   decrementQty?: (id: number | string) => void;
   incrementQty?: (id: number | string) => void;
-  totalPrice?: number;
-  savedItemsCount?: number;
   toggleSaved?: (id: number | string) => void;
 };
 
@@ -53,6 +53,7 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
   }, [products]);
 
+
   const toggleSaved = (id: string | number) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
@@ -63,7 +64,9 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     );
     setClickedItems(prev => {
       const newClickedItems = { ...prev };
+      // Since the object starts empty, the first time an item is clicked to be saved, newClickedItems[id] is undefined, therefore, setting its value to !newClickedItems[id] is basically coercing !undefined to true
       newClickedItems[id] = !newClickedItems[id];
+      // Filter the newClickedItems object and return only the properties that have their value as true
       const currentlySaved = Object.filter(
         newClickedItems,
         (value: boolean) => value === true
@@ -132,13 +135,13 @@ export const Provider: FC<ReactNode> = ({ children }) => {
       value={{
         products,
         cartItemCount,
+        totalPrice,
+        savedItemsCount,
         addToCart,
         deleteFromCart,
         setQuantity,
         incrementQty,
         decrementQty,
-        totalPrice,
-        savedItemsCount,
         toggleSaved,
       }}
     >
@@ -146,3 +149,14 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
+
+declare global {
+  interface ObjectConstructor {
+    filter: (obj: any, predicate: any) => any;
+  }
+}
+// Custom function to filter objects
+Object.filter = (obj, predicate) =>
+  Object.keys(obj)
+    .filter(key => predicate(obj[key]))
+    .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {});

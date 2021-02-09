@@ -10,11 +10,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import Rating from "@material-ui/lab/Rating";
-import { memo } from "react";
+import { useContext } from "react";
 import { BsHeart as HeartIcon } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
 import { ShoppingCart } from "../components/Header";
-import { useContext } from "react";
 import { GlobalContext, ProductType } from "../context/GlobalState";
 
 type Props = {
@@ -28,10 +27,8 @@ const ProductCard = ({ product }: Props) => {
     <Flex
       as={LinkBox}
       direction="column"
-      // justify="space-between"
       className="product-card"
       p={3}
-      // h="406px"
       h="460px"
       w="100%"
       maxW="320px"
@@ -82,7 +79,6 @@ const ProductCard = ({ product }: Props) => {
           align="center"
           justify="space-between"
           flexWrap="wrap"
-          // h="28px"
         >
           <Flex align="center">
             <Rating
@@ -137,4 +133,4 @@ const ProductCard = ({ product }: Props) => {
   );
 };
 
-export default memo(ProductCard);
+export default ProductCard;

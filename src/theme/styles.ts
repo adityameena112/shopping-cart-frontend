@@ -21,6 +21,7 @@ const styles = {
       minWidth: "17px",
       fontSize: "0.65rem",
     },
+    // Product card hover style only on screens with pointer
     "@media (hover: hover) and (pointer: fine)": {
       ".product-card:hover": {
         border: "1px solid",

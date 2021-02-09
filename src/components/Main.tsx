@@ -12,7 +12,7 @@ import {
   Text,
   Tag,
   Grid,
-  useBreakpointValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { BsGridFill } from "react-icons/bs";
 import { IoListOutline } from "react-icons/io5";
@@ -28,6 +28,7 @@ const ListIcon = chakra(IoListOutline);
 
 const Main = () => {
   const { products, savedItemsCount } = useContext(GlobalContext);
+  const [isLargerThan567] = useMediaQuery("(min-width: 567px)");
 
   return (
     <Box
@@ -50,13 +51,8 @@ const Main = () => {
               Sort by
             </FormLabel>
             <Select
-              // minW="fit-content"
-              // size="xs"
-              size={useBreakpointValue({
-                base: "xs",
-                smallTablet: "sm",
-                sm: "sm",
-              })}
+              minW="fit-content"
+              size={isLargerThan567 ? "sm" : "xs"}
               rounded="base"
               borderColor="gray.500"
               cursor="pointer"
@@ -68,13 +64,8 @@ const Main = () => {
           </FormControl>
           <FormControl w="fit-content">
             <Select
-              // minW="fit-content"
-              // size="xs"
-              size={useBreakpointValue({
-                base: "xs",
-                smallTablet: "sm",
-                sm: "sm",
-              })}
+              minW="fit-content"
+              size={isLargerThan567 ? "sm" : "xs"}
               rounded="base"
               borderColor="gray.400"
               cursor="pointer"
@@ -86,13 +77,8 @@ const Main = () => {
           </FormControl>
           <FormControl w="fit-content">
             <Select
-              // minW="fit-content"
-              // size="xs"
-              size={useBreakpointValue({
-                base: "xs",
-                smallTablet: "sm",
-                sm: "sm",
-              })}
+              minW="fit-content"
+              size={isLargerThan567 ? "sm" : "xs"}
               rounded="base"
               borderColor="gray.400"
               cursor="pointer"
@@ -151,11 +137,7 @@ const Main = () => {
           </Tabs>
           <Tabs
             variant="unstyled"
-            size={useBreakpointValue({
-              base: "sm",
-              smallTablet: "md",
-              sm: "md",
-            })}
+            size="sm"
             mb={5}
           >
             <TabList bg="appBlue.50" rounded="md">
@@ -167,7 +149,7 @@ const Main = () => {
                   boxShadow: "base",
                 }}
               >
-                <ListIcon />
+                <ListIcon fontSize={["sm", "md"]} />
               </Tab>
               <Tab
                 _selected={{
@@ -177,7 +159,7 @@ const Main = () => {
                   boxShadow: "base",
                 }}
               >
-                <GridIcon />
+                <GridIcon fontSize={["sm", "md"]} />
               </Tab>
             </TabList>
           </Tabs>
@@ -209,14 +191,3 @@ const Main = () => {
 };
 
 export default Main;
-
-declare global {
-  interface ObjectConstructor {
-    filter: (obj: any, predicate: any) => any;
-  }
-}
-// Custom function to filter objects
-Object.filter = (obj, predicate) =>
-  Object.keys(obj)
-    .filter(key => predicate(obj[key]))
-    .reduce((res, key) => Object.assign(res, { [key]: obj[key] }), {});

@@ -20,8 +20,7 @@ import {
   Switch,
   useLocation,
 } from "react-router-dom";
-import { useRef } from "react";
-import { useContext } from "react";
+import { useRef, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 // Give the components chakra props
@@ -130,11 +129,11 @@ const Header = () => {
             </Box>
           </HStack>
           <Switch>
+            {/* Show the avatar on every route except "/login" and "/register" */}
             <Route path="/login">{null}</Route>
             <Route path="/register">{null}</Route>
             <Route path="*">
               <Avatar
-                // ml={[5, 7]}
                 ml={cartItemCount! > 0 ? [5, 7] : [3, 5]}
                 width={[7, 8]}
                 height={[7, 8]}

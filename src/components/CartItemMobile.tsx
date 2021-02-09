@@ -88,12 +88,10 @@ const CartItemMobile = ({ product }: Props) => {
               <Text fontSize="sm">{product.shortDescription}</Text>
             </LinkOverlay>
           </Box>
-          {/* <Flex> */}
           <Box mt={2} fontWeight="bold" fontSize="lg">
             ${subTotal.toFixed(2)}
           </Box>
         </Flex>
-        {/* </Flex> */}
       </Flex>
 
       <Flex mt={3}>

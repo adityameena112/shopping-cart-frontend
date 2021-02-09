@@ -44,7 +44,7 @@ const VisibleEye = chakra(AiFillEye);
 const InvisibleEye = chakra(AiFillEyeInvisible);
 
 const AuthForm = ({ authType }: Props) => {
-  const [show, setShow] = useState(false);
+  const [showPassword, setShow] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -82,11 +82,10 @@ const AuthForm = ({ authType }: Props) => {
               {authType}
             </Heading>
             <Field name="email">
-              {({ field, form }: FieldProps) => (
+              {({ field, form }: FieldProps<any, Values>) => (
                 <FormControl
                   w="100%"
-                  // @ts-ignore
-                  isInvalid={form.errors.email && form.touched.email}
+                  isInvalid={form.errors.email ? form.touched.email : undefined}
                 >
                   {/* field: { name, value, onChange, onBlur } */}
                   <Input
@@ -105,18 +104,17 @@ const AuthForm = ({ authType }: Props) => {
               )}
             </Field>
             <Field name="password">
-              {({ field, form }: FieldProps) => (
+              {({ field, form }: FieldProps<any, Values>) => (
                 <FormControl
                   w="100%"
-                  // @ts-ignore
-                  isInvalid={form.errors.password && form.touched.password}
+                  isInvalid={form.errors.password ? form.touched.password : undefined}
                 >
                   <InputGroup>
                     {/* field: { name, value, onChange, onBlur } */}
                     <Input
                       {...field}
                       id="password"
-                      type={show ? "text" : "password"}
+                      type={showPassword ? "text" : "password"}
                       placeholder="Password"
                       _placeholder={{
                         color: "gray.600",
@@ -132,13 +130,13 @@ const AuthForm = ({ authType }: Props) => {
                         variant="link"
                         size="sm"
                         icon={
-                          show ? (
+                          showPassword ? (
                             <VisibleEye size={22} />
                           ) : (
                             <InvisibleEye size={22} />
                           )
                         }
-                        onClick={() => setShow(!show)}
+                        onClick={() => setShow(!showPassword)}
                       />
                     </InputRightElement>
                   </InputGroup>

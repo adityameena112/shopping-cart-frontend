@@ -44,7 +44,7 @@ const VisibleEye = chakra(AiFillEye);
 const InvisibleEye = chakra(AiFillEyeInvisible);
 
 const AuthForm = ({ authType }: Props) => {
-  const [showPassword, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -136,7 +136,7 @@ const AuthForm = ({ authType }: Props) => {
                             <InvisibleEye size={22} />
                           )
                         }
-                        onClick={() => setShow(!showPassword)}
+                        onClick={() => setShowPassword(!showPassword)}
                       />
                     </InputRightElement>
                   </InputGroup>

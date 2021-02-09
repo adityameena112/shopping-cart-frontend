@@ -1,9 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import FooterMobile from "../components/FooterMobile";
-import Main from "../components/Main";
+import React, { lazy, Suspense } from "react";
+
+const Main = lazy(() => import("../components/Main"));
 
 const Home = () => {
   return (
@@ -20,7 +22,23 @@ const Home = () => {
           <Sidebar />
         </Box>
         <Box flex={1} py={[0, 8]}>
-          <Main />
+          <Suspense
+            fallback={
+              <Spinner
+                color="appBlue.500"
+                size="xl"
+                thickness="4px"
+                position="absolute"
+                top="-35%"
+                left="0"
+                bottom="0"
+                right="0"
+                margin="auto"
+              />
+            }
+          >
+            <Main />
+          </Suspense>
         </Box>
       </Flex>
       <Footer />

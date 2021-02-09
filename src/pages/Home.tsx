@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import FooterMobile from "../components/FooterMobile";
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 const Main = lazy(() => import("../components/Main"));
 

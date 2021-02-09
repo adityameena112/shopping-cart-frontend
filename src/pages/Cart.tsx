@@ -18,7 +18,8 @@ import CartItemMobile from "../components/CartItemMobile";
 import { Link as RouterLink } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, totalPrice } = useContext(GlobalContext);
+  const { products, totalPrice } = useContext(GlobalContext);
+  const cartItems = products?.filter(product => product.inCart === true);
   const [isLargerThan345] = useMediaQuery("(min-width: 345px)");
 
   return (

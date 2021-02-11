@@ -15,7 +15,7 @@ import {
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { BiTrash } from "react-icons/bi";
-import { ProductType, GlobalContext } from "../context/GlobalState";
+import { ProductType, GlobalContext } from "../../context/GlobalState";
 import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";

@@ -11,7 +11,7 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 
-import ContactDetails from "./ContactDetails";
+import ContactDetails from "../ContactDetails";
 
 const FooterMobile = () => {
   return (

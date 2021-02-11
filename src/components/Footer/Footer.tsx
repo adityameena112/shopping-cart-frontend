@@ -1,6 +1,6 @@
 import { Flex, Heading, Link, VStack } from "@chakra-ui/react";
 
-import ContactDetails from "./ContactDetails";
+import ContactDetails from "../ContactDetails";
 
 const Footer = () => {
   return (

@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import SearchBar from "./SearchBar";
-import SidebarMobile from "../components/SidebarMobile";
+import SidebarMobile from "./Sidebar/SidebarMobile";
 import { FaShoppingCart } from "react-icons/fa";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import Badge from "@material-ui/core/Badge";

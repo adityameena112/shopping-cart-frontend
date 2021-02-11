@@ -12,7 +12,7 @@ import {
 import { BsHeart as HeartIcon } from "react-icons/bs";
 import { BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { BiTrash as TrashIcon } from "react-icons/bi";
-import { ProductType, GlobalContext } from "../context/GlobalState";
+import { ProductType, GlobalContext } from "../../context/GlobalState";
 import { useContext, ChangeEvent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 

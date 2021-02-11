@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import CartItem from "../components/CartItem";
-import CartItemMobile from "../components/CartItemMobile";
+import CartItem from "../components/CartItem/CartItem";
+import CartItemMobile from "../components/CartItem/CartItemMobile";
 import { Link as RouterLink } from "react-router-dom";
 import Container from "../components/Container";
 

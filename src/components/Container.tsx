@@ -1,8 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
 import Header from "../components/Header";
-import Sidebar from "./Sidebar";
-import Footer from "./Footer";
-import FooterMobile from "./FooterMobile";
+import Sidebar from "./Sidebar/Sidebar";
+import Footer from "./Footer/Footer";
+import FooterMobile from "./Footer/FooterMobile";
 import { ReactNode } from "react";
 
 type Props = {

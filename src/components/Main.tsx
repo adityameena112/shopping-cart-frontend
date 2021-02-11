@@ -178,7 +178,7 @@ const Main = () => {
         placeItems="center"
         placeContent="center"
       >
-        {products!.map((product, i) => (
+        {products!.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </Grid>

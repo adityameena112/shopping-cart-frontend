@@ -40,17 +40,21 @@ export const GlobalContext = createContext<ContextType>({});
 export const Provider: FC<ReactNode> = ({ children }) => {
   const toast = useToast();
   const [products, setProducts] = useState<ProductType[]>(mockProducts);
-  const [cartItemCount, setCartItemCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [clickedItems, setClickedItems] = useState<Record<string, boolean>>({});
+  const [cartItemCount, setCartItemCount] = useState(0);
   const [savedItemsCount, setSavedItemsCount] = useState(0);
 
   useEffect(() => {
+    // Get products in cart
     const productsInCart = products.filter(product => product.inCart === true);
     const productPrices = productsInCart.map(
       product => +product.price * +product.quantity!
     );
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
+    setCartItemCount(productsInCart.length);
+    // Get saved products
+    const savedProducts = products.filter(product => product.isSaved === true);
+    setSavedItemsCount(savedProducts.length);
   }, [products]);
 
   const toggleSaved = (id: string | number) => {
@@ -61,18 +65,6 @@ export const Provider: FC<ReactNode> = ({ children }) => {
           : prevProduct
       )
     );
-    setClickedItems(prev => {
-      const newClickedItems = { ...prev };
-      // Since the object starts empty, the first time an item is clicked to be saved, newClickedItems[id] is undefined, therefore, setting its value to !newClickedItems[id] is basically coercing !undefined to true
-      newClickedItems[id] = !newClickedItems[id];
-      // Filter the newClickedItems object and return only the properties that have their value as true
-      const currentlySaved = Object.filter(
-        newClickedItems,
-        (value: boolean) => value === true
-      );
-      setSavedItemsCount(Object.keys(currentlySaved).length);
-      return { ...newClickedItems };
-    });
   };
 
   const addToCart = (product: ProductType) => {
@@ -82,7 +74,6 @@ export const Provider: FC<ReactNode> = ({ children }) => {
       duration: 1500,
       isClosable: true,
     });
-    setCartItemCount(prev => prev + 1);
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
         prevProduct.id === product.id
@@ -93,7 +84,6 @@ export const Provider: FC<ReactNode> = ({ children }) => {
   };
 
   const deleteFromCart = (id: number | string) => {
-    setCartItemCount(prev => prev - 1);
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
         prevProduct.id === id ? { ...prevProduct, inCart: false } : prevProduct

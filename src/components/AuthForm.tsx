@@ -98,6 +98,7 @@ const AuthForm = ({ authType }: Props) => {
                     }}
                     bg="blackAlpha.200"
                     py={7}
+                    autoComplete="on"
                   />
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
@@ -107,7 +108,9 @@ const AuthForm = ({ authType }: Props) => {
               {({ field, form }: FieldProps<any, Values>) => (
                 <FormControl
                   w="100%"
-                  isInvalid={form.errors.password ? form.touched.password : undefined}
+                  isInvalid={
+                    form.errors.password ? form.touched.password : undefined
+                  }
                 >
                   <InputGroup>
                     {/* field: { name, value, onChange, onBlur } */}
@@ -121,6 +124,7 @@ const AuthForm = ({ authType }: Props) => {
                       }}
                       bg="blackAlpha.200"
                       py={7}
+                      autoComplete="on"
                     />
                     <InputRightElement h="100%" mr={1}>
                       <IconButton

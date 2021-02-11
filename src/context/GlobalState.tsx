@@ -53,7 +53,6 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
   }, [products]);
 
-
   const toggleSaved = (id: string | number) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>

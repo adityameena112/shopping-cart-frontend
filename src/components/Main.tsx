@@ -135,11 +135,7 @@ const Main = () => {
               </Tab>
             </TabList>
           </Tabs>
-          <Tabs
-            variant="unstyled"
-            size="sm"
-            mb={5}
-          >
+          <Tabs variant="unstyled" size="sm" mb={5}>
             <TabList bg="appBlue.50" rounded="md">
               <Tab
                 _selected={{

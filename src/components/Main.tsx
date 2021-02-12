@@ -17,10 +17,16 @@ import {
 import { BsGridFill } from "react-icons/bs";
 import { IoListOutline } from "react-icons/io5";
 import { searchTags } from "../mockDB/db";
-import ProductCard from "./ProductCard";
 import Badge from "@material-ui/core/Badge";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import loadableVisibility from "react-loadable-visibility/loadable-components";
+import LoadingProduct from "./LoadingProduct";
+
+// Lazy load each product and display them when they become visible in the viewport
+const ProductCard = loadableVisibility(() => import("./ProductCard"), {
+  fallback: <LoadingProduct />,
+});
 
 // Give the components chakra props
 const GridIcon = chakra(BsGridFill);
@@ -179,7 +185,11 @@ const Main = () => {
         placeContent="center"
       >
         {products!.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            className="loading-product"
+          />
         ))}
       </Grid>
     </Box>

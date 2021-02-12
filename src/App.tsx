@@ -3,9 +3,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
 import Register from "./pages/Register";
-import { Provider } from "./context/GlobalState";
 import Cart from "./pages/Cart";
 import SearchResults from "./pages/SearchResults";
+import { Provider } from "./context/GlobalState";
 
 const App = () => {
   return (

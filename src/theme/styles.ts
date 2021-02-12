@@ -30,6 +30,11 @@ const styles = {
         transform: "scale(1.01)",
       },
     },
+    ".loading-product": {
+      h: "460px",
+      w: "100%",
+      maxW: "320px",
+    },
   },
 };
 

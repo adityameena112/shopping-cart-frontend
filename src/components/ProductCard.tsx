@@ -18,6 +18,7 @@ import { GlobalContext, ProductType } from "../context/GlobalState";
 
 type Props = {
   product: ProductType;
+  className?: string;
 };
 
 const ProductCard = ({ product }: Props) => {
@@ -74,12 +75,7 @@ const ProductCard = ({ product }: Props) => {
         <Flex mt={2} align="center" h="36px">
           <Text fontSize="xs">{product.tagline}</Text>
         </Flex>
-        <Flex
-          mt={2}
-          align="center"
-          justify="space-between"
-          flexWrap="wrap"
-        >
+        <Flex mt={2} align="center" justify="space-between" flexWrap="wrap">
           <Flex align="center">
             <Rating
               name="read-only-stars"

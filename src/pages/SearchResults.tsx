@@ -8,19 +8,27 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import ProductCard from "../components/ProductCard";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import Container from "../components/Container";
+import loadableVisibility from "react-loadable-visibility/loadable-components";
+import LoadingProduct from "../components/LoadingProduct";
 
 interface ParamsTypes {
   name: string;
 }
 
+const ProductCard = loadableVisibility(
+  () => import("../components/ProductCard"),
+  {
+    fallback: <LoadingProduct />,
+  }
+);
+
 const SearchResults = () => {
   const { products } = useContext(GlobalContext);
   const { name } = useParams<ParamsTypes>();
-  const searchedProducts = products!.filter(
+  const foundProducts = products!.filter(
     product =>
       (product &&
         product.title &&
@@ -55,9 +63,13 @@ const SearchResults = () => {
           placeItems="center"
           placeContent="center"
         >
-          {searchedProducts.length > 0 ? (
-            searchedProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
+          {foundProducts.length > 0 ? (
+            foundProducts.map(product => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                className="loading-product"
+              />
             ))
           ) : (
             <Text>No products found</Text>

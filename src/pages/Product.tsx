@@ -28,7 +28,7 @@ const Product = () => {
   const { products, addToCart } = useContext(GlobalContext);
   // Get the url parameter (/:id) value
   const { id } = useParams<ParamsTypes>();
-  const product = products!.find(product => product.id === id);
+  const product = products.find(product => product.id === id);
   return (
     <Container>
       <Box p={3}>
@@ -106,12 +106,12 @@ const Product = () => {
               <Button
                 colorScheme="red"
                 onClick={() => {
-                  addToCart!(product!);
+                  addToCart(product!);
                 }}
-                disabled={product!.inCart ? true : false}
+                disabled={product?.inCart ? true : false}
               >
                 <ShoppingCart mr={3} />
-                {product!.inCart ? "Added to Cart" : "Add to Cart"}
+                {product?.inCart ? "Added to Cart" : "Add to Cart"}
               </Button>
             </Box>
           </Stack>

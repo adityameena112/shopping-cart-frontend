@@ -3,16 +3,16 @@ import { useToast } from "@chakra-ui/react";
 import { mockProducts } from "../mockDB/db";
 
 type ContextType = {
-  products?: ProductType[];
-  cartItemCount?: number;
-  totalPrice?: number;
-  savedItemsCount?: number;
-  addToCart?: (product: ProductType) => void;
-  deleteFromCart?: (id: number | string) => void;
-  setQuantity?: (qty: string, id: number | string) => void;
-  decrementQty?: (id: number | string) => void;
-  incrementQty?: (id: number | string) => void;
-  toggleSaved?: (id: number | string) => void;
+  products: ProductType[];
+  cartItemCount: number;
+  totalPrice: number;
+  savedItemsCount: number;
+  addToCart: (product: ProductType) => void;
+  deleteFromCart: (id: number | string) => void;
+  setQuantity: (qty: string, id: number | string) => void;
+  decrementQty: (id: number | string) => void;
+  incrementQty: (id: number | string) => void;
+  toggleSaved: (id: number | string) => void;
 };
 
 export interface ProductType {
@@ -34,7 +34,7 @@ export interface ProductType {
 }
 
 // Create context
-export const GlobalContext = createContext<ContextType>({});
+export const GlobalContext = createContext({} as ContextType);
 
 // Provider component
 export const Provider: FC<ReactNode> = ({ children }) => {

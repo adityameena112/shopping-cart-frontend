@@ -133,7 +133,7 @@ const Header = () => {
             <Route path="/register">{null}</Route>
             <Route path="*">
               <Avatar
-                ml={cartItemCount! > 0 ? [5, 7] : [3, 5]}
+                ml={cartItemCount > 0 ? [5, 7] : [3, 5]}
                 width={[7, 8]}
                 height={[7, 8]}
                 src="https://bit.ly/broken-link"

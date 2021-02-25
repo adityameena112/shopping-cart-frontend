@@ -107,7 +107,7 @@ const CartItemMobile = ({ product }: Props) => {
               duration: 1500,
               isClosable: true,
             });
-            toggleSaved!(product.id);
+            toggleSaved(product.id);
           }}
           px={2}
           borderRight="1px solid"
@@ -120,7 +120,7 @@ const CartItemMobile = ({ product }: Props) => {
           variant="ghost"
           size="md"
           px={2}
-          onClick={() => deleteFromCart!(product.id)}
+          onClick={() => deleteFromCart(product.id)}
         >
           <TrashIcon
             mr={1}
@@ -141,7 +141,7 @@ const CartItemMobile = ({ product }: Props) => {
             rounded="full"
             {...dec}
             disabled={+product.quantity! === 1}
-            onClick={() => decrementQty!(product.id)}
+            onClick={() => decrementQty(product.id)}
             w="17.5%"
           >
             <MinusIcon />
@@ -163,7 +163,7 @@ const CartItemMobile = ({ product }: Props) => {
             rounded="full"
             {...inc}
             disabled={+product.quantity! === 3}
-            onClick={() => incrementQty!(product.id)}
+            onClick={() => incrementQty(product.id)}
             w="17.5%"
           >
             <AddIcon />

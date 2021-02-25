@@ -16,7 +16,7 @@ import Container from "../components/Container";
 
 const Cart = () => {
   const { products, totalPrice } = useContext(GlobalContext);
-  const cartItems = products?.filter(product => product.inCart === true);
+  const cartItems = products.filter(product => product.inCart === true);
   const [isLargerThan345] = useMediaQuery("(min-width: 345px)");
 
   return (
@@ -50,14 +50,14 @@ const Cart = () => {
           MY CART
         </Box>
         {/* Duplicated so the children don't have the same key */}
-        {cartItems!.map(product => (
+        {cartItems.map(product => (
           <CartItem key={product.id} product={product} />
         ))}
-        {cartItems!.map(product => (
+        {cartItems.map(product => (
           <CartItemMobile key={product.id} product={product} />
         ))}
 
-        {cartItems!.length > 0 ? (
+        {cartItems.length > 0 ? (
           <>
             <Text
               fontSize={isLargerThan345 ? "2xl" : "xl"}
@@ -66,7 +66,7 @@ const Cart = () => {
             >
               Total:{" "}
               <Box as="span" fontWeight="bold">
-                ${totalPrice?.toFixed(2)}
+                ${totalPrice.toFixed(2)}
               </Box>
             </Text>
             <HStack spacing={4} alignSelf="flex-end">

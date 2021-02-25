@@ -28,7 +28,7 @@ const ProductCard = loadableVisibility(
 const SearchResults = () => {
   const { products } = useContext(GlobalContext);
   const { name } = useParams<ParamsTypes>();
-  const foundProducts = products!.filter(
+  const foundProducts = products.filter(
     product =>
       (product &&
         product.title &&

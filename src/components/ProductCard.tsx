@@ -106,7 +106,7 @@ const ProductCard = ({ product }: Props) => {
                 duration: 1500,
                 isClosable: true,
               });
-              toggleSaved!(product.id);
+              toggleSaved(product.id);
             }}
           >
             Watch
@@ -118,7 +118,7 @@ const ProductCard = ({ product }: Props) => {
         colorScheme="red"
         variant="outline"
         onClick={() => {
-          addToCart!(product);
+          addToCart(product);
         }}
         disabled={product.inCart ? true : false}
       >

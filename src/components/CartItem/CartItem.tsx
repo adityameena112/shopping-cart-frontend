@@ -78,7 +78,7 @@ const CartItem = ({ product }: Props) => {
                   duration: 1500,
                   isClosable: true,
                 });
-                toggleSaved!(product.id);
+                toggleSaved(product.id);
               }}
             >
               Save Item
@@ -88,7 +88,7 @@ const CartItem = ({ product }: Props) => {
               colorScheme="red"
               variant="ghost"
               size="sm"
-              onClick={() => deleteFromCart!(product.id)}
+              onClick={() => deleteFromCart(product.id)}
             >
               Remove Item
             </Button>
@@ -110,7 +110,7 @@ const CartItem = ({ product }: Props) => {
           rounded="md"
           value={product.quantity}
           onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-            setQuantity!(e.target.value, product.id)
+            setQuantity(e.target.value, product.id)
           }
         >
           <option value="1">1</option>

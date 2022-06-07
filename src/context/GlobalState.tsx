@@ -13,6 +13,8 @@ type ContextType = {
   decrementQty: (id: number | string) => void;
   incrementQty: (id: number | string) => void;
   toggleSaved: (id: number | string) => void;
+  isLoggedIn: boolean;
+  changeLogin: () => void;
 };
 
 export interface ProductType {
@@ -43,6 +45,7 @@ export const Provider: FC<ReactNode> = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [savedItemsCount, setSavedItemsCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Get products in cart
@@ -119,6 +122,10 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     );
   };
 
+  const changeLogin = () => {
+    setIsLoggedIn(localStorage.getItem('token') !== undefined)
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -132,6 +139,8 @@ export const Provider: FC<ReactNode> = ({ children }) => {
         incrementQty,
         decrementQty,
         toggleSaved,
+        isLoggedIn,
+        changeLogin
       }}
     >
       {children}

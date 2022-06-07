@@ -27,6 +27,8 @@ import { BiExit } from "react-icons/bi";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import * as Yup from "yup";
+import HttpService from '../service/HttpService';
+import AuthenticateUserDto from "../Model/AuthenticateUserDto";
 
 type Props = {
   authType: string;
@@ -44,7 +46,10 @@ const VisibleEye = chakra(AiFillEye);
 const InvisibleEye = chakra(AiFillEyeInvisible);
 
 const AuthForm = ({ authType }: Props) => {
+  const httpService = new HttpService();
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -52,6 +57,18 @@ const AuthForm = ({ authType }: Props) => {
       .min(8, "Must be at least 8 characters")
       .required("Required"),
   });
+
+  const handleLogin = () => {
+    const authenticateUserDto: AuthenticateUserDto = {
+      username: username,
+      password: password
+    }
+    httpService.authenticateUser(authenticateUserDto).then((response: any) => {
+      localStorage.setItem('token', response.data.id_token)
+    }).catch((error: any) => {
+      console.log(error)
+    })
+  }
 
   return (
     <Formik
@@ -84,11 +101,11 @@ const AuthForm = ({ authType }: Props) => {
               {({ field, form }: FieldProps<any, Values>) => (
                 <FormControl
                   w="100%"
-                  isInvalid={form.errors.email ? form.touched.email : undefined}
+                  isInvalid={username.trim() === ''}
                 >
                   {/* field: { name, value, onChange, onBlur } */}
                   <Input
-                    {...field}
+                    // {...field}
                     id="email"
                     type="email"
                     placeholder="Email Address"
@@ -98,6 +115,7 @@ const AuthForm = ({ authType }: Props) => {
                     bg="blackAlpha.200"
                     py={7}
                     autoComplete="on"
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
@@ -107,14 +125,12 @@ const AuthForm = ({ authType }: Props) => {
               {({ field, form }: FieldProps<any, Values>) => (
                 <FormControl
                   w="100%"
-                  isInvalid={
-                    form.errors.password ? form.touched.password : undefined
-                  }
+                  isInvalid={password.trim() === ''}
                 >
                   <InputGroup>
                     {/* field: { name, value, onChange, onBlur } */}
                     <Input
-                      {...field}
+                      // {...field}
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="Password"
@@ -124,6 +140,7 @@ const AuthForm = ({ authType }: Props) => {
                       bg="blackAlpha.200"
                       py={7}
                       autoComplete="on"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <InputRightElement h="100%" mr={1}>
                       <IconButton
@@ -172,6 +189,8 @@ const AuthForm = ({ authType }: Props) => {
               colorScheme="red"
               py={[6, 7]}
               fontWeight="700"
+              disabled={username === '' || password === ''}
+              onClick={handleLogin}
             >
               <ExitIcon size={26} flex={1} />
               <Text flex={6} px={1}>

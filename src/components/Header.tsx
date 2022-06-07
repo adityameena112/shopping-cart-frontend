@@ -27,7 +27,7 @@ import { GlobalContext } from "../context/GlobalState";
 export const ShoppingCart = chakra(FaShoppingCart);
 
 const Header = () => {
-  const { cartItemCount } = useContext(GlobalContext);
+  const { cartItemCount, isLoggedIn } = useContext(GlobalContext);
 
   const location = useLocation();
   const hamburgerRef = useRef<SVGSVGElement>(null);
@@ -69,13 +69,14 @@ const Header = () => {
               fontWeight="medium"
               color="appBlue.500"
             >
-              Logo
+              Shopping Cart
             </Heading>
           </Link>
         </Flex>
         <SearchBar display={["none", "block"]} />
         <Flex justify="space-between" align="center">
           <HStack spacing={[3, 5]}>
+            { isLoggedIn && 
             <Link
               as={RouterLink}
               to={location.pathname === "/login" ? "/register" : "/login"}
@@ -101,6 +102,7 @@ const Header = () => {
                 {location.pathname === "/login" ? "Sign Up" : "Sign In"}
               </Button>
             </Link>
+            }
             <Box
               mr={
                 location.pathname === "/login" ||
